@@ -3,19 +3,20 @@ Holds all the utilitie code for pluGET and the webrequests function
 """
 
 import os
-import sys
-import requests
-import shutil
 import re
+import shutil
+import sys
 from pathlib import Path
+
+import requests
 from rich.console import Console
 from rich.table import Table
-from ..handlers.handle_sftp import sftp_create_connection
-from ..handlers.handle_ftp import ftp_create_connection
 
-from ..utils.console_output import rich_print_error
 from ..handlers.handle_config import config_value
-from ..settings import PLUGETVERSION
+from ..handlers.handle_ftp import ftp_create_connection
+from ..handlers.handle_sftp import sftp_create_connection
+from ..settings import PLUGETVERSION, HTTP
+from ..utils.console_output import rich_print_error
 
 
 def get_command_help(command: str) -> None:
@@ -108,23 +109,15 @@ def check_for_pluGET_update() -> None:
     return None
 
 
-def api_do_request(url) -> list:
+def api_do_request(url: str) -> list | dict | None:
     """
     Handles the webrequest and returns a json list
     """
-    webrequest_header = {'user-agent': 'pluGET/1.0'}
     try:
-        response = requests.get(url, headers=webrequest_header)
-    except:
-        rich_print_error("Error: Couldn't create webrequest")
-        # return None to make functions quit
-        return None
-    try:
-        api_json_data = response.json()
+        return HTTP.get(url).json()
     except:
         rich_print_error("Error: Couldn't parse json of webrequest")
         return None
-    return api_json_data
 
 
 def api_test_spiget() -> None:
@@ -132,14 +125,13 @@ def api_test_spiget() -> None:
     Test if the Spiget api sends a 200 status code back
     """
     try:
-        r = requests.get('https://api.spiget.org/v2/status')
+        r = HTTP.get('https://api.spiget.org/v2/status')
+        if r.status_code != 200:
+            rich_print_error("Error: Problems with the API detected. Plese try it again later!")
+            exit(-1)
     except (requests.exceptions.HTTPError, requests.exceptions.ConnectionError):
         rich_print_error("Error: Couldn't make a connection to the API. Check you connection to the internet!")
-        sys.exit()
-    if r.status_code != 200:
-        rich_print_error("Error: Problems with the API detected. Plese try it again later!")
-        sys.exit()
-    return None
+        exit(-1)
 
 
 def create_temp_plugin_folder() -> Path:

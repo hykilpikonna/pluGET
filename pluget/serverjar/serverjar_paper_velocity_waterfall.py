@@ -6,16 +6,17 @@ All are from the PaperMC Team and use the same api structure which is the reason
 """
 
 import re
-import requests
 from pathlib import Path
-from rich.table import Table
+
 from rich.console import Console
 from rich.progress import Progress
+from rich.table import Table
 
 from ..handlers.handle_config import config_value
-from ..utils.console_output import rich_print_error
-from ..handlers.handle_sftp import sftp_create_connection, sftp_upload_server_jar
 from ..handlers.handle_ftp import ftp_create_connection, ftp_upload_server_jar
+from ..handlers.handle_sftp import sftp_create_connection, sftp_upload_server_jar
+from ..settings import HTTP
+from ..utils.console_output import rich_print_error
 from ..utils.utilities import \
     api_do_request, create_temp_plugin_folder, remove_temp_plugin_folder, convert_file_size_down
 
@@ -241,8 +242,7 @@ def serverjar_papermc_update(
     download_path = Path(f"{path_server_root}/{download_file_name}")
 
     with Progress(transient=True) as progress:
-        header = {'user-agent': 'pluGET/1.0'}
-        r = requests.get(url, headers=header, stream=True)
+        r = HTTP.get(url, stream=True)
         try:
             file_size = int(r.headers.get('Content-Length'))
             # create progress bar

@@ -4,18 +4,19 @@ File and functions which handle the download of the specific plugins
 
 import re
 from pathlib import Path
-import requests
 
-from rich.table import Table
 from rich.console import Console
 from rich.progress import Progress
+from rich.table import Table
 
-from ..utils.utilities import convert_file_size_down, remove_temp_plugin_folder, create_temp_plugin_folder
-from ..utils.utilities import api_do_request
-from ..utils.console_output import rich_print_error
 from ..handlers.handle_config import config_value
-from ..handlers.handle_sftp import sftp_create_connection, sftp_upload_file
 from ..handlers.handle_ftp import ftp_create_connection, ftp_upload_file
+from ..handlers.handle_sftp import sftp_create_connection, sftp_upload_file
+from ..settings import HTTP
+from ..utils.console_output import rich_print_error
+from ..utils.utilities import api_do_request
+from ..utils.utilities import convert_file_size_down, remove_temp_plugin_folder, \
+    create_temp_plugin_folder
 
 
 def handle_regex_plugin_name(full_plugin_name) -> str:
@@ -110,8 +111,7 @@ def download_specific_plugin_version_spiget(plugin_id, download_path, version_id
 
     # use rich Progress() to create progress bar
     with Progress(transient=True) as progress:
-        header = {'user-agent': 'pluGET/1.0'}
-        r = requests.get(url, headers=header, stream=True)
+        r = HTTP.get(url, stream=True)
         try:
             file_size = int(r.headers.get('content-length'))
             # create progress bar
