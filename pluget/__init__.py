@@ -33,5 +33,4 @@ def run():
         # no arguments were used so start pluGET console
         clear_console()
         print_logo()
-        check_for_pluGET_update()
         handle_input()
