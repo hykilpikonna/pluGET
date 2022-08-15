@@ -5,7 +5,7 @@ from .handlers.handle_input import handle_input
 from .settings import PLUGETVERSION
 from .utils.console_output import rename_console_title, clear_console, print_logo, \
     print_console_logo
-from .utils.utilities import check_requirements, api_test_spiget, check_for_pluGET_update
+from .utils.utilities import check_requirements, api_test_spiget
 
 __version__ = PLUGETVERSION
 
@@ -28,7 +28,6 @@ def run():
     if args["mode"] is not None and args["object"] is not None:
         # arguments were used so call the handle_input function to get the right function call
         print_console_logo()
-        check_for_pluGET_update()
         handle_input(args["mode"], args["object"], args["version"], args["no_confirmation"], arguments_from_console=True)
     else:
         # no arguments were used so start pluGET console
