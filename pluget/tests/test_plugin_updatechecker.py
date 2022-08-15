@@ -1,6 +1,6 @@
 import unittest
 
-from src.plugin import plugin_updatechecker 
+from ..plugin import plugin_updatechecker 
 
 
 class TestCases(unittest.TestCase):

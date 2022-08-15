@@ -1,5 +1,5 @@
-""""
-	Handles the logic for the config validation, reading and creating
+"""
+Handles the logic for the config validation, reading and creating
 """
 
 import os

@@ -7,10 +7,10 @@ import re
 from pathlib import Path
 from rich.console import Console
 
-from src.handlers.handle_config import config_value
-from src.utils.console_output import rich_print_error
-from src.handlers.handle_sftp import sftp_create_connection, sftp_list_all
-from src.handlers.handle_ftp import ftp_create_connection, ftp_list_all
+from ..handlers.handle_config import config_value
+from ..utils.console_output import rich_print_error
+from ..handlers.handle_sftp import sftp_create_connection, sftp_list_all
+from ..handlers.handle_ftp import ftp_create_connection, ftp_list_all
 
 
 def delete_plugin(plugin_name: str) -> None:

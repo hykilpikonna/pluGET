@@ -1,25 +1,18 @@
-"""
-Handles the main function and the argument passing for the whole pluGET program
-"""
-
-import sys
 import argparse
 
-# check if folder 'src' is accessible with all modules needed and if not exit
-try:
-    from src.handlers.handle_config import check_config, validate_config
-    from src.utils.console_output import rename_console_title, clear_console, print_logo, print_console_logo
-    from src.utils.utilities import check_requirements, api_test_spiget, check_for_pluGET_update
-    from src.handlers.handle_input import handle_input
-except TypeError:
-    print("Folder 'src' not found in the directory or missing files or broken functions detected! \
-        \nPlease redownload the files from here: https://www.github.com/Neocky/pluGET")
-    sys.exit()
+from .handlers.handle_config import check_config, validate_config
+from .settings import PLUGETVERSION
+from .utils.console_output import rename_console_title, clear_console, print_logo, print_console_logo
+from .utils.utilities import check_requirements, api_test_spiget, check_for_pluGET_update
+from .handlers.handle_input import handle_input
 
 
-if __name__ == "__main__":
+__version__ = PLUGETVERSION
+
+
+def run():
     parser = argparse.ArgumentParser(description="Arguments for pluGET",
-                                 formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+                                     formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument("mode", help="Mode (install/update/etc.)", nargs='?', default=None)
     parser.add_argument("object", help="Object/Plugin Name", nargs='?', default=None)
     parser.add_argument("version", help="Version", nargs='?', default=None)

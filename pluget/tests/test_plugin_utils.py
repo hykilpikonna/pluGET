@@ -1,7 +1,7 @@
 import unittest
 
-from src.plugin import plugin_downloader
-from src.utils import utilities
+from ..plugin import plugin_downloader
+from ..utils import utilities
 
 
 class TestCases(unittest.TestCase):

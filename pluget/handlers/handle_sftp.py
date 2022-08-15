@@ -5,8 +5,8 @@ import paramiko
 import stat
 import re
 
-from src.utils.console_output import rich_print_error
-from src.handlers.handle_config import config_value
+from ..utils.console_output import rich_print_error
+from ..handlers.handle_config import config_value
 
 
 def sftp_create_connection():

@@ -5,7 +5,7 @@ Handles the console on first startup of pluGET and prints logo and sets title
 import os
 from rich.console import Console
 
-from src.settings import PLUGETVERSION
+from ..settings import PLUGETVERSION
 
 
 def rich_print_error(error_message) -> None:

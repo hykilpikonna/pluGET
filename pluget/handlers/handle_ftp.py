@@ -3,8 +3,8 @@ import sys
 import ftplib
 import re
 
-from src.utils.console_output import rich_print_error
-from src.handlers.handle_config import config_value
+from ..utils.console_output import rich_print_error
+from ..handlers.handle_config import config_value
 
 
 def ftp_create_connection():

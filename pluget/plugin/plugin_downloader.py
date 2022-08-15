@@ -10,12 +10,12 @@ from rich.table import Table
 from rich.console import Console
 from rich.progress import Progress
 
-from src.utils.utilities import convert_file_size_down, remove_temp_plugin_folder, create_temp_plugin_folder
-from src.utils.utilities import api_do_request
-from src.utils.console_output import rich_print_error
-from src.handlers.handle_config import config_value
-from src.handlers.handle_sftp import sftp_create_connection, sftp_upload_file
-from src.handlers.handle_ftp import ftp_create_connection, ftp_upload_file
+from ..utils.utilities import convert_file_size_down, remove_temp_plugin_folder, create_temp_plugin_folder
+from ..utils.utilities import api_do_request
+from ..utils.console_output import rich_print_error
+from ..handlers.handle_config import config_value
+from ..handlers.handle_sftp import sftp_create_connection, sftp_upload_file
+from ..handlers.handle_ftp import ftp_create_connection, ftp_upload_file
 
 
 def handle_regex_plugin_name(full_plugin_name) -> str:

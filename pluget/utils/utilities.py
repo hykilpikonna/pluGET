@@ -10,12 +10,12 @@ import re
 from pathlib import Path
 from rich.console import Console
 from rich.table import Table
-from src.handlers.handle_sftp import sftp_create_connection
-from src.handlers.handle_ftp import ftp_create_connection
+from ..handlers.handle_sftp import sftp_create_connection
+from ..handlers.handle_ftp import ftp_create_connection
 
-from src.utils.console_output import rich_print_error
-from src.handlers.handle_config import config_value
-from src.settings import PLUGETVERSION
+from ..utils.console_output import rich_print_error
+from ..handlers.handle_config import config_value
+from ..settings import PLUGETVERSION
 
 
 def get_command_help(command: str) -> None:
