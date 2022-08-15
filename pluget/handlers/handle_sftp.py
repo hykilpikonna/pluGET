@@ -18,20 +18,19 @@ def sftp_create_connection():
     """
     config_values = config_value()
     cnopts = pysftp.CnOpts()
-    cnopts.hostkeys = None # TODO fix this
+    cnopts.hostkeys = None  # TODO fix this
     try:
-        sftp = pysftp.Connection(config_values.server, username=config_values.username, \
+        return pysftp.Connection(config_values.server, username=config_values.username, \
                password=config_values.password, port=config_values.sftp_port, cnopts=cnopts)
     except paramiko.ssh_exception.AuthenticationException:
         rich_print_error("Error: [SFTP]: Wrong Username/Password")
     except paramiko.ssh_exception.SSHException:
         rich_print_error("Error: [SFTP]: The SFTP server isn't available.")
-    try:
-        return sftp
-    except UnboundLocalError:
+    except Exception as e:
         rich_print_error("Error: [SFTP]: Check your config file!")
         rich_print_error("Exiting program...")
-        sys.exit()
+        print(e)
+        exit(-1)
 
 
 def sftp_show_plugins(sftp) -> None:

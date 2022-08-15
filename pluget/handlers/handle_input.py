@@ -116,7 +116,7 @@ def get_input() -> str:
             input_command, input_selected_object, *input_parameter = input("pluGET >> ").split()
             break
         except ValueError:
-            if input_command == None:
+            if input_command is None:
                 # request input again if no input was given or not enough
                 continue
             else:

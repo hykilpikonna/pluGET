@@ -43,17 +43,17 @@ def get_version_id_spiget(plugin_id, plugin_version) -> str:
     """
     Returns the version id of the plugin
     """
-    if plugin_version == None or plugin_version == 'latest':
+    if plugin_version is None or plugin_version == 'latest':
         url = f"https://api.spiget.org/v2/resources/{plugin_id}/versions/latest"
         response = api_do_request(url)
-        if response == None:
+        if response is None:
             return None
         version_id = response["id"]
         return version_id
 
     url = f"https://api.spiget.org/v2/resources/{plugin_id}/versions?size=100&sort=-name"
     version_list = api_do_request(url)
-    if version_list == None:
+    if version_list is None:
         return None
     for plugins in version_list:
         plugin_update = plugins["name"]
@@ -69,7 +69,7 @@ def get_version_name_spiget(plugin_id, plugin_version_id) -> str:
     """
     url = f"https://api.spiget.org/v2/resources/{plugin_id}/versions/{plugin_version_id}"
     response = api_do_request(url)
-    if response == None:
+    if response is None:
         return None
     version_name = response["name"]
     return version_name
@@ -99,7 +99,7 @@ def download_specific_plugin_version_spiget(plugin_id, download_path, version_id
     Download a specific plugin
     """
     config_values = config_value()
-    if version_id != "latest" and version_id != None:
+    if version_id != "latest" and version_id is not None:
         #url = f"https://spigotmc.org/resources/{plugin_id}/download?version={versionID}"
         rich_print_error("Sorry but specific version downloads aren't supported because of cloudflare protection. :(")
         rich_print_error("Reverting to latest version.")
@@ -166,7 +166,7 @@ def get_specific_plugin_spiget(plugin_id, plugin_version="latest") -> None:
 
     url = f"https://api.spiget.org/v2/resources/{plugin_id}"
     plugin_details = api_do_request(url)
-    if plugin_details == None:
+    if plugin_details is None:
         return None
     try:
         plugin_name = plugin_details["name"]
@@ -180,7 +180,7 @@ def get_specific_plugin_spiget(plugin_id, plugin_version="latest") -> None:
     plugin_download_name = f"{plugin_name}-{plugin_version_name}.jar"
     download_plugin_path = Path(f"{download_path}/{plugin_download_name}")
     # if api requests weren't successfull stop function
-    if plugin_version_id == None or plugin_version_name == None:
+    if plugin_version_id is None or plugin_version_name is None:
         rich_print_error("Error: Webrequest timed out")
         return None
     # set the plugin_version_id to None if a specific version wasn't given as parameter
@@ -200,7 +200,7 @@ def search_specific_plugin_spiget(plugin_name) -> None:
     """
     url= f"https://api.spiget.org/v2/search/resources/{plugin_name}?field=name&sort=-downloads"
     plugin_search_results = api_do_request(url)
-    if plugin_search_results == None:
+    if plugin_search_results is None:
         rich_print_error("Error: Webrequest wasn't successfull!")
         return None
 

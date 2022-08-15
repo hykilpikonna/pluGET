@@ -48,7 +48,7 @@ def get_version_group(file_server_jar_full_name) -> str:
     :returns: Version group of api
     """
     version_group = re.sub(r"-\d*.jar$", "", file_server_jar_full_name)
-    version_group = re.sub(r"^(\w*\-)", "", version_group)
+    version_group = re.sub(r"^(\w*-)", "", version_group)
     return version_group
 
 
@@ -83,8 +83,7 @@ def get_versions_behind(serverjar_version, latest_version) -> int:
 
     :returns: Number difference between the two versions
     """
-    versions_behind = int(latest_version) - int(serverjar_version)
-    return versions_behind
+    return int(latest_version) - int(serverjar_version)
 
 
 def get_papermc_download_file_name(mc_version, serverjar_version, file_server_jar_full_name) -> str:
@@ -117,19 +116,19 @@ def serverjar_papermc_check_update(file_server_jar_full_name) -> None:
     :returns: None
     """
     serverjar_version = get_installed_serverjar_version(file_server_jar_full_name)
-    if serverjar_version == None:
+    if serverjar_version is None:
         rich_print_error("Error: An error occured while checking the installed serverjar version")
         return None
     
     version_group = get_version_group(file_server_jar_full_name)
-    if version_group == None:
+    if version_group is None:
         rich_print_error(
             "Error: An error occured while checking the installed version group of the installed serverjar"
         )
         return None
 
     latest_version = find_latest_available_version(file_server_jar_full_name, version_group)
-    if latest_version == None:
+    if latest_version is None:
         rich_print_error("Error: An error occured while checking for the latest available version of the serverjar")
         return None
 
@@ -182,24 +181,24 @@ def serverjar_papermc_update(
             path_server_root = create_temp_plugin_folder()
 
     # exit if the mc version can't be found
-    if file_server_jar_full_name == None and mc_version == None:
+    if file_server_jar_full_name is None and mc_version is None:
         rich_print_error("Error: Please specifiy the minecraft version as third argument!")
         return False
 
     # if both the file name and the serverjar_to_download are emtpy then exit
-    if file_server_jar_full_name == None and serverjar_to_download == None:
+    if file_server_jar_full_name is None and serverjar_to_download is None:
         rich_print_error("Error: Couldn't get serverjar name to download")
         return False
 
-    if mc_version == None:
+    if mc_version is None:
         mc_version = get_version_group(file_server_jar_full_name)
 
-    if file_server_jar_full_name == None:
+    if file_server_jar_full_name is None:
         papermc_serverjar = serverjar_to_download
     else:
         papermc_serverjar = file_server_jar_full_name
 
-    if server_jar_version == "latest" or server_jar_version == None:
+    if server_jar_version == "latest" or server_jar_version is None:
         server_jar_version = find_latest_available_version(papermc_serverjar, mc_version)
 
     # use rich console for nice colors
@@ -209,7 +208,7 @@ def serverjar_papermc_update(
         f" [cyan]→ [bright_green]{server_jar_version}"
     )
 
-    if file_server_jar_full_name != None:
+    if file_server_jar_full_name is not None:
         serverjar_version = get_installed_serverjar_version(file_server_jar_full_name)
         if get_versions_behind(serverjar_version, server_jar_version) == 0:
             rich_console.print("    [not bold][bright_green]No updates currently available!")
@@ -238,6 +237,8 @@ def serverjar_papermc_update(
     elif "velocity" in papermc_serverjar:
         url = f"https://papermc.io/api/v2/projects/velocity/versions/{mc_version}" + \
             f"/builds/{server_jar_version}/downloads/{download_file_name}"
+    else:
+        raise AssertionError(f"We're currently not compatible with {papermc_serverjar}")
     
     download_path = Path(f"{path_server_root}/{download_file_name}")
 
