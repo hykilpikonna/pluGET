@@ -4,8 +4,9 @@ Handles the logic for the config validation, reading and creating
 
 import os
 import sys
-import ruamel.yaml
 from pathlib import Path
+
+import ruamel.yaml
 from rich.console import Console
 
 

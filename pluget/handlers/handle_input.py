@@ -2,15 +2,15 @@
 Handles the input through the pluGET command line
 """
 
-from ..utils.console_output import rich_print_error
-from ..utils.utilities import get_command_help
-from ..plugin.plugin_remover import delete_plugin
 from ..plugin.plugin_downloader import get_specific_plugin_spiget, search_specific_plugin_spiget
+from ..plugin.plugin_remover import delete_plugin
 from ..plugin.plugin_updatechecker import check_installed_plugins, update_installed_plugins
-from ..serverjar.serverjar_updatechecker import \
-    check_update_available_installed_server_jar, update_installed_server_jar
 from ..serverjar.serverjar_paper_velocity_waterfall import serverjar_papermc_update
 from ..serverjar.serverjar_purpur import serverjar_purpur_update
+from ..serverjar.serverjar_updatechecker import \
+    check_update_available_installed_server_jar, update_installed_server_jar
+from ..utils.console_output import rich_print_error
+from ..utils.utilities import get_command_help
 
 
 # check

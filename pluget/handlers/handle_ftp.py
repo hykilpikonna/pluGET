@@ -1,10 +1,10 @@
-import os
-import sys
 import ftplib
+import os
 import re
+import sys
 
-from ..utils.console_output import rich_print_error
 from ..handlers.handle_config import config_value
+from ..utils.console_output import rich_print_error
 
 
 def ftp_create_connection():

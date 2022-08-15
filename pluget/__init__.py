@@ -1,11 +1,11 @@
 import argparse
 
 from .handlers.handle_config import check_config, validate_config
-from .settings import PLUGETVERSION
-from .utils.console_output import rename_console_title, clear_console, print_logo, print_console_logo
-from .utils.utilities import check_requirements, api_test_spiget, check_for_pluGET_update
 from .handlers.handle_input import handle_input
-
+from .settings import PLUGETVERSION
+from .utils.console_output import rename_console_title, clear_console, print_logo, \
+    print_console_logo
+from .utils.utilities import check_requirements, api_test_spiget, check_for_pluGET_update
 
 __version__ = PLUGETVERSION
 

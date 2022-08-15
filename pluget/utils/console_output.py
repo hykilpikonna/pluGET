@@ -3,6 +3,7 @@ Handles the console on first startup of pluGET and prints logo and sets title
 """
 
 import os
+
 from rich.console import Console
 
 from ..settings import PLUGETVERSION

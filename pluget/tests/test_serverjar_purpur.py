@@ -1,7 +1,8 @@
 import unittest
 
-from ..serverjar import serverjar_purpur
 from ..serverjar import serverjar_paper_velocity_waterfall
+from ..serverjar import serverjar_purpur
+
 
 class TestCases(unittest.TestCase):
     def test_get_installed_serverjar_version(self):

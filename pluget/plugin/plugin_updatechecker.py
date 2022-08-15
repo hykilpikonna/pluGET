@@ -2,20 +2,23 @@
 Handles the plugin checking and updating
 """
 
+import io
 import os
 import re
-import io
-from pathlib import Path
 import zipfile
-from rich.progress import track
-from rich.table import Table
-from rich.console import Console
+from pathlib import Path
 from urllib.error import HTTPError
 from zipfile import ZipFile
 
+from rich.console import Console
+from rich.progress import track
+from rich.table import Table
+
 from ..handlers.handle_config import config_value
-from ..handlers.handle_sftp import sftp_create_connection, sftp_download_file, sftp_validate_file_attributes, sftp_list_all
-from ..handlers.handle_ftp import ftp_create_connection, ftp_download_file, ftp_validate_file_attributes, ftp_list_all
+from ..handlers.handle_ftp import ftp_create_connection, ftp_download_file, \
+    ftp_validate_file_attributes, ftp_list_all
+from ..handlers.handle_sftp import sftp_create_connection, sftp_download_file, \
+    sftp_validate_file_attributes, sftp_list_all
 from ..plugin.plugin_downloader import get_specific_plugin_spiget, get_download_path
 from ..utils.console_output import rich_print_error
 from ..utils.utilities import api_do_request, create_temp_plugin_folder, remove_temp_plugin_folder

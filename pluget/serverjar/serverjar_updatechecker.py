@@ -4,14 +4,16 @@ Checks the installed serverjar for updates
 
 import os
 from pathlib import Path
+
 from rich.console import Console
 
 from ..handlers.handle_config import config_value
-from ..utils.console_output import rich_print_error
-from ..handlers.handle_sftp import sftp_create_connection, sftp_list_files_in_server_root
 from ..handlers.handle_ftp import ftp_create_connection, ftp_list_files_in_server_root
-from ..serverjar.serverjar_paper_velocity_waterfall import serverjar_papermc_check_update, serverjar_papermc_update
+from ..handlers.handle_sftp import sftp_create_connection, sftp_list_files_in_server_root
+from ..serverjar.serverjar_paper_velocity_waterfall import serverjar_papermc_check_update, \
+    serverjar_papermc_update
 from ..serverjar.serverjar_purpur import serverjar_purpur_check_update, serverjar_purpur_update
+from ..utils.console_output import rich_print_error
 
 
 def get_installed_server_jar_file(config_values) -> str:

@@ -5,12 +5,13 @@ Removes the specified plugin file from the ./plugins folder
 import os
 import re
 from pathlib import Path
+
 from rich.console import Console
 
 from ..handlers.handle_config import config_value
-from ..utils.console_output import rich_print_error
-from ..handlers.handle_sftp import sftp_create_connection, sftp_list_all
 from ..handlers.handle_ftp import ftp_create_connection, ftp_list_all
+from ..handlers.handle_sftp import sftp_create_connection, sftp_list_all
+from ..utils.console_output import rich_print_error
 
 
 def delete_plugin(plugin_name: str) -> None:
